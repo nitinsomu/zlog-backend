@@ -1,4 +1,8 @@
-from flask import request
+import jwt
+import os
+#
+from bson import json_util
+from flask import request, make_response, jsonify
 from flask_restful import Resource
 #
 from db.db_connection import user_db
@@ -21,10 +25,15 @@ class Login(Resource):
                 return {"error" : "User not found"}, 400
             valid = self.hashing.validate_password(password=password, hash=user.get("password"))
             if valid:
-                return {"message" : "User authenticated"}, 200
+                token = jwt.encode({
+                    'username': user.get("username"),
+                    'id': str(user.get("_id"))
+                }, "thisisasamplesecretkeyforthezlogproject")
+                resp = make_response(jsonify({"status": "ok"}))
+                resp.set_cookie("token", token)
+                return resp
             else:
                 return {"error" : "Wrong username or password"}, 400
-            
         except Exception as e:
             return {"error" : str(e)}, 500
 
