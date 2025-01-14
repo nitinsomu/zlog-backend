@@ -28,7 +28,7 @@ class Login(Resource):
                 token = jwt.encode({
                     'username': user.get("username"),
                     'id': str(user.get("_id"))
-                }, "thisisasamplesecretkeyforthezlogproject")
+                }, "thisisasamplesecretkeyforthezlogproject", algorithm="HS256")
                 resp = make_response(jsonify({"status": "ok"}))
                 resp.set_cookie("token", token)
                 return resp
