@@ -29,7 +29,7 @@ class Login(Resource):
                     'username': user.get("username"),
                     'id': str(user.get("_id"))
                 }, "thisisasamplesecretkeyforthezlogproject", algorithm="HS256")
-                resp = make_response(jsonify({"status": "ok"}))
+                resp = make_response(jsonify({"id": str(user.get("_id")), "username": user.get("username")}))
                 resp.set_cookie("token", token)
                 return resp
             else:
