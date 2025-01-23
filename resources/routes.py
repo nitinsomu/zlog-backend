@@ -1,6 +1,7 @@
 from flask import Blueprint
 from flask_restful import Api
 #
+from resources.createPost import CreatePost
 from resources.login import Login
 from resources.logout import Logout
 from resources.profile import Profile
@@ -28,5 +29,10 @@ zlog_api.add_resource(
 zlog_api.add_resource(
     Logout,
     '/logout'
+)
+
+zlog_api.add_resource(
+    CreatePost,
+    '/create'
 )
 
