@@ -6,6 +6,7 @@ from resources.login import Login
 from resources.logout import Logout
 from resources.profile import Profile
 from resources.register import Register
+from resources.singlePost import SinglePost
 
 base_route = '/'
 zlog_blueprint = Blueprint('zlog_blueprint', __name__, url_prefix=base_route)
@@ -13,26 +14,31 @@ zlog_api = Api(zlog_blueprint)
 
 zlog_api.add_resource(
     Register,
-    '/register'
+    'register'
 )
 
 zlog_api.add_resource(
     Login,
-    '/login'
+    'login'
 )
 
 zlog_api.add_resource(
     Profile,
-    '/profile'
+    'profile'
 )
 
 zlog_api.add_resource(
     Logout,
-    '/logout'
+    'logout'
 )
 
 zlog_api.add_resource(
     Post,
-    '/post'
+    'post'
+)
+
+zlog_api.add_resource(
+    SinglePost,
+    'post/<string:post_id>'
 )
 
